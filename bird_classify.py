@@ -84,7 +84,7 @@ def user_selections():
                         help='class score threshold')
     parser.add_argument('--storage', required=True,
                         help='File path to store images and results')
-    parser.add_argument('--sound', required=True,
+    parser.add_argument('--sound', required=False,
                         help='File path to deterrent sound')
     parser.add_argument('--print', default=False, required=False,
                         help='Print inference results to terminal')
@@ -132,7 +132,8 @@ def main():
           if results[0][0] !='background':
             save_data(image, storage_dir,results)
           if 'fox squirrel, eastern fox squirrel, Sciurus niger' in results:
-            playsound(args.sound)
+            if args.sound is not None:
+              playsound(args.sound)
             logging.info('Deterrent sounded')
 
         last_results=results
